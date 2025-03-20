@@ -1,0 +1,9 @@
+# Default ignored files
+.allure
+.idea
+screenshotsTests
+*.class
+*.log
+
+/target/allure-results/
+/target/surefire-reports/

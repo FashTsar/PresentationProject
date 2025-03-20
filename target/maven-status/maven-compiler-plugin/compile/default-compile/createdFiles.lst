@@ -1,0 +1,10 @@
+CommonActionsForAllPages.class
+ActionsForReportAfterStep.class
+org\example\Main.class
+PageCart.class
+Header.class
+PageProductCard.class
+ModalLogIn.class
+DataProperties.class
+OtherActions.class
+PageCatalog.class

@@ -1,0 +1,8 @@
+ApiTemplates.class
+ApiAuth.class
+ApiCart.class
+ProductCardTests.class
+CatalogTests.class
+CartApiTests.class
+AuthTests.class
+ApiCatalog.class
