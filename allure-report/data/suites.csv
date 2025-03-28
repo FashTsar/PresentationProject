@@ -1,5 +1,5 @@
 "DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
 "","23950","checkAddToCartProduct()","","Wed Feb 19 15:18:27 MSK 2025","passed","Wed Feb 19 15:18:51 MSK 2025","","ProductCardTests","ProductCardTests","checkAddToCartProduct"
 "","16997","checkAuthPositive()","","Wed Feb 19 15:17:42 MSK 2025","passed","Wed Feb 19 15:17:59 MSK 2025","","AuthTests","AuthTests","checkAuthPositive"
-"","11025","checkAddToCartProductApi()","","Wed Feb 19 15:17:59 MSK 2025","passed","Wed Feb 19 15:18:10 MSK 2025","","CartApiTests","CartApiTests","checkAddToCartProductApi"
+"","11025","checkAddToCartProductApi()","","Wed Feb 19 15:17:59 MSK 2025","passed","Wed Feb 19 15:18:10 MSK 2025","","ApiTestsCart","ApiTestsCart","checkAddToCartProductApi"
 "","17356","checkGoProductCard()","","Wed Feb 19 15:18:10 MSK 2025","passed","Wed Feb 19 15:18:27 MSK 2025","","CatalogTests","CatalogTests","checkGoProductCard"

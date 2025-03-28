@@ -55,8 +55,6 @@ public class ProductCardTests {
     @Feature("Проверка добавление товара в корзину из карточки товара")
     @Test
     public void checkAddToCartProduct() {
-        boolean result = false;
-
         if (Objects.equals(dataProperties.getDataProperties("priorityRunningTests.properties" ,"priorityRunningTestForCart"), "WebDriver")) {
             commonActionsForAllPages.auth();
 
@@ -81,38 +79,29 @@ public class ProductCardTests {
 
             // 3. Ожидаем появления alert'а и проверяем текст в нём
             step("3. Ожидаем появления alert'а и проверяем текст в нём");
-            boolean checkAlert = false;
             Alert alert = wait30.until(ExpectedConditions.alertIsPresent());
             String alertText = alert.getText();
             alert.accept();
-            if (Objects.equals(alertText, "Product added.")) checkAlert = true;
-            actionsForReportAfterStep.reportAfterStep("checkAddToCartProduct", "3", checkAlert);
+            actionsForReportAfterStep.reportAfterStep("checkAddToCartProduct", "3");
+
+            Assertions.assertEquals("Product added.", alertText);
 
             // 4. Проверяем что товар появился в корзине
             step("4. Проверяем что товар появился в корзине");
-            boolean checkAddCart = false;
             String linkCart = driver.findElement(By.xpath(header.getCart())).getDomAttribute("href");
             driver.get(rootUrl+linkCart); // переходим на страницу
             wait30.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(pageCart.getButtonPlaceOrder())));
             String productImgCart = driver.findElement(By.xpath(pageCart.getProductImg(1))).getDomAttribute("src");
             String productTitleCart = driver.findElement(By.xpath(pageCart.getProductTitle(1))).getText();
             String productPriceCart = driver.findElement(By.xpath(pageCart.getProductPrice(1))).getText();
-            if(Objects.equals(productImgCart, productImgCard)
-                    && productTitleCart.equals(productTitleCard)
-                    && productPriceCard.contains(productPriceCart)) checkAddCart = true;
-            actionsForReportAfterStep.reportAfterStep("checkAddToCartProduct", "4", checkAddCart);
+            actionsForReportAfterStep.reportAfterStep("checkAddToCartProduct", "4");
 
-            // если все условия выполнены, то тест пройден
-            System.out.println();
-            System.out.println("---------- Результаты ----------");
-            System.out.println("шаг 3 = " + checkAlert);
-            System.out.println("шаг 4 = " + checkAddCart);
-            if (checkAlert && checkAddCart) result = true;
+            Assertions.assertEquals(productImgCart, productImgCard);
+            Assertions.assertEquals(productTitleCart, productTitleCard);
+            Assertions.assertTrue(productPriceCard.contains(productPriceCart));
+
         } else {
-            result = true;
             System.out.println("Запуск WebDriver отключен для данного раздела для этого теста, включите его в \"priorityRunningTests.properties\" или запустите АПИ-тест.");
         }
-
-        Assertions.assertTrue(result, "Тест провалился");
     }
 }

@@ -6,7 +6,7 @@ import org.openqa.selenium.WebDriver;
 
 import static io.qameta.allure.Allure.step;
 
-public class CartApiTests {
+public class ApiTestsCart {
     public ApiCart apiCart;
     public ApiCatalog apiCatalog;
     public ActionsForReportAfterStep actionsForReportAfterStep;
@@ -30,8 +30,6 @@ public class CartApiTests {
     @Feature("Проверка добавление товара в корзину")
     @Test
     public void checkAddToCartProductApi(){
-        boolean result = false;
-
         // 1. получаем список продуктов и их id'шников и выбираем рандомный товар для теста
         step("1. получаем список продуктов и их id'шников");
         String dataProducts = apiCatalog.getProducts();
@@ -53,9 +51,8 @@ public class CartApiTests {
         String dataProductsInCart = apiCart.getDataCart();
         int idProductCart = com.jayway.jsonpath.JsonPath.parse(dataProductsInCart)
                 .read("$.Items[0].prod_id");
-        if (idProductCart == idProduct) result = true;
-        actionsForReportAfterStep.reportAfterStepForApiTests("checkAddToCartProductApi", "3", result);
+        actionsForReportAfterStep.reportAfterStepForApiTests("checkAddToCartProductApi", "3");
 
-        Assertions.assertTrue(result, "Тест провалился");
+        Assertions.assertEquals(idProductCart, idProduct);
     }
 }

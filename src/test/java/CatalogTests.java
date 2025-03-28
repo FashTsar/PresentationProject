@@ -1,6 +1,9 @@
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -8,7 +11,6 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 import java.time.Duration;
-import java.util.Objects;
 
 import static io.qameta.allure.Allure.step;
 
@@ -47,8 +49,6 @@ public class CatalogTests {
     @Feature("Проверка перехода в карточку товара")
     @Test
     public void checkGoProductCard() {
-        boolean result = false;
-
         // удаляем старые скриншоты
         actionsForReportAfterStep.deleteScreenshot("checkGoProductCard");
 
@@ -68,13 +68,11 @@ public class CatalogTests {
         String productTitleCard = driver.findElement(By.xpath(pageProductCard.getProductTitle())).getText();
         String productPriceCard = driver.findElement(By.xpath(pageProductCard.getProductPrice())).getText();
         String productDescriptionCard = driver.findElement(By.xpath(pageProductCard.getProductDescription())).getText();
+        actionsForReportAfterStep.reportAfterStep("checkGoProductCard", "2");
 
-        if(Objects.equals(productImgCard, productImg)
-                && Objects.equals(productTitleCard, productTitle)
-                && productPriceCard.contains(productPrice)
-                && Objects.equals(productDescriptionCard, productDescription)) result = true;
-        actionsForReportAfterStep.reportAfterStep("checkGoProductCard", "2", result);
-
-        Assertions.assertTrue(result, "Тест провалился");
+        Assertions.assertEquals(productTitleCard, productTitle);
+        Assertions.assertEquals(productDescriptionCard, productDescription);
+        Assertions.assertEquals(productImgCard, productImg);
+        Assertions.assertTrue(productPriceCard.contains(productPrice));
     }
 }

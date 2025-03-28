@@ -1,6 +1,9 @@
 import io.qameta.allure.Epic;
 import io.qameta.allure.Feature;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -36,8 +39,6 @@ public class AuthTests {
     @Feature("Проверка авторизации пользователя при указании корректных данных")
     @Test
     public void checkAuthPositive() {
-        boolean result = false;
-
         // удаляем старые скриншоты
         actionsForReportAfterStep.deleteScreenshot("checkAuthPositive");
 
@@ -49,9 +50,8 @@ public class AuthTests {
         // 2. проверяем что авторизовались
         step("2. проверяем что авторизовались");
         String grabName = driver.findElement(By.xpath(header.getBlockNameOfUser())).getText();
-        if (grabName.contains(dataProperties.getDataProperties("config.properties","login"))) result = true;
-        actionsForReportAfterStep.reportAfterStep("checkAuthPositive", "2", result);
+        actionsForReportAfterStep.reportAfterStep("checkAuthPositive", "2");
 
-        Assertions.assertTrue(result, "Тест провалился");
+        Assertions.assertTrue(grabName.contains(dataProperties.getDataProperties("config.properties","login")));
     }
 }
